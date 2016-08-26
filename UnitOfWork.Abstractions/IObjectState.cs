@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace UnitOfWork.Data.DataContext
+namespace UnitOfWork.Abstractions
 {
     public interface IObjectState
     {

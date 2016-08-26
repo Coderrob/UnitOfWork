@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UnitOfWork.Data.DataContext
+namespace UnitOfWork.Abstractions
 {
     public interface IDataContext : IDisposable
     {

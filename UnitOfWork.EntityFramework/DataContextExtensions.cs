@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Data.Entity;
+using UnitOfWork.Abstractions;
 
-namespace UnitOfWork.Data.DataContext
+namespace UnitOfWork
 {
-    public class StateHelper
+    public static class DataContextExtensions
     {
-        public static EntityState ConvertState(ObjectState state)
+        public static EntityState ConvertState(this ObjectState objectState)
         {
-            switch (state)
+            switch (objectState)
             {
                 case ObjectState.Added:
                     return EntityState.Added;
@@ -22,13 +23,13 @@ namespace UnitOfWork.Data.DataContext
                     return EntityState.Unchanged;
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(state));
+                    throw new ArgumentOutOfRangeException(nameof(objectState));
             }
         }
 
-        public static ObjectState ConvertState(EntityState state)
+        public static ObjectState ConvertState(this EntityState entityState)
         {
-            switch (state)
+            switch (entityState)
             {
                 case EntityState.Detached:
                     return ObjectState.Unchanged;
@@ -46,7 +47,7 @@ namespace UnitOfWork.Data.DataContext
                     return ObjectState.Modified;
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(state));
+                    throw new ArgumentOutOfRangeException(nameof(entityState));
             }
         }
     }

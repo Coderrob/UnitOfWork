@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using UnitOfWork.Data.DataContext;
+using UnitOfWork.Abstractions;
 
-namespace UnitOfWork.Data.Repository.EntityFramework
+namespace UnitOfWork
 {
     public abstract class Entity : IObjectState
     {

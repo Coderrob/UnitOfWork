@@ -1,13 +1,13 @@
 using System;
 using System.Data.Entity;
 using System.Diagnostics;
+using UnitOfWork.Abstractions;
 
-namespace UnitOfWork.Data.DataContext
+namespace UnitOfWork
 {
     public class DataContext : DbContext, IDataContext
     {
-        public DataContext(string nameOrConnectionString)
-            : base(nameOrConnectionString)
+        public DataContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
             InstanceId = Guid.NewGuid();
             Debug.WriteLine("Creating instance " + InstanceId);
@@ -28,7 +28,7 @@ namespace UnitOfWork.Data.DataContext
 
         public void SyncObjectState(object entity)
         {
-            Entry(entity).State = StateHelper.ConvertState(((IObjectState) entity).ObjectState);
+            Entry(entity).State = ((IObjectState) entity).ObjectState.ConvertState();
         }
 
         public new DbSet<T> Set<T>() where T : class
@@ -40,7 +40,7 @@ namespace UnitOfWork.Data.DataContext
         {
             foreach (var dbEntityEntry in ChangeTracker.Entries())
             {
-                dbEntityEntry.State = StateHelper.ConvertState(((IObjectState) dbEntityEntry.Entity).ObjectState);
+                dbEntityEntry.State = ((IObjectState) dbEntityEntry.Entity).ObjectState.ConvertState();
             }
         }
 
@@ -48,7 +48,7 @@ namespace UnitOfWork.Data.DataContext
         {
             foreach (var dbEntityEntry in ChangeTracker.Entries())
             {
-                ((IObjectState) dbEntityEntry.Entity).ObjectState = StateHelper.ConvertState(dbEntityEntry.State);
+                ((IObjectState) dbEntityEntry.Entity).ObjectState = dbEntityEntry.State.ConvertState();
             }
         }
     }

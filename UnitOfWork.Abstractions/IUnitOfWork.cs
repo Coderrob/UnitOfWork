@@ -1,9 +1,7 @@
-﻿using ActiveHours.Data.Infrastructure;
-using ActiveHours.Data.Repository;
-using System;
+﻿using System;
 using System.Data;
 
-namespace ActiveHours.Data.UnitOfWork
+namespace UnitOfWork.Abstractions
 {
     public interface IUnitOfWork : IDisposable
     {

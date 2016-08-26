@@ -6,9 +6,9 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using Microsoft.Practices.Unity;
-using UnitOfWork.Data.DataContext;
+using UnitOfWork.Abstractions;
 
-namespace UnitOfWork.Data.UnitOfWork.EntityFramework
+namespace UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -78,7 +78,7 @@ namespace UnitOfWork.Data.UnitOfWork.EntityFramework
         public void Rollback()
         {
             _transaction.Rollback();
-            ((DataContext.DataContext) _dataContext).SyncObjectsStatePostCommit();
+            ((DataContext) _dataContext).SyncObjectsStatePostCommit();
         }
 
         public void Dispose()
