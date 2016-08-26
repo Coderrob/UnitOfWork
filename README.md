@@ -13,7 +13,7 @@ interfaces for IUnitOfWork, IRepository, and for those using EntityFramework the
 implementations for these abstractions are in the UnitOfWork.EntityFramework project where they've
 been implemented with EF backing classes.
 
-THe core to these abstractions are the IUnitOfWork and IRepository interfaces below:
+The core to these abstractions are the IUnitOfWork and IRepository interfaces below:
 
 ```
     public interface IUnitOfWork : IDisposable
